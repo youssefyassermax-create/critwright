@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#291909">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Critwright</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<!-- Paper filter: roughens the page edge into a tear, then lays stains and grain over it -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="torn" x="-3%" y="-3%" width="106%" height="106%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="7" result="edge"/>
+    <feDisplacementMap in="SourceGraphic" in2="edge" scale="18" xChannelSelector="R" yChannelSelector="G" result="paper"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="3" seed="3" result="blot"/>
+    <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0.38  0 0 0 0 0.22  0 0 0 0 0.06  0 0 0 1.7 -0.82" result="stain"/>
+    <feComposite in="stain" in2="paper" operator="in" result="stainIn"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="grain"/>
+    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0 0.1  0 0 0 0.3 -0.08" result="speck"/>
+    <feComposite in="speck" in2="paper" operator="in" result="speckIn"/>
+    <feMerge><feMergeNode in="paper"/><feMergeNode in="stainIn"/><feMergeNode in="speckIn"/></feMerge>
+  </filter>
+</svg>
+<!-- Things left lying on the table around the book -->
+<div id="props" aria-hidden="true">
+  <i class="coin c1"></i><i class="coin c2"></i><i class="coin stack c3"></i><i class="coin silver c4"></i>
+  <i class="coin c5"></i><i class="coin silver c6"></i><i class="coin stack c7"></i><i class="coin c8"></i>
+  <div id="bracelet"></div>
+  <i class="gem g1"></i><i class="gem g2"></i><i class="gem g3"></i>
+  <i class="die6 five d1"></i><i class="die6 d2"></i>
+  <div class="candle"><i></i></div>
+  <i class="potion p1"></i><i class="potion p2"></i><i class="potion p3"></i>
+  <div class="dagger k1"><i></i><b></b></div><div class="dagger k2"><i></i><b></b></div>
+  <div class="wand"><i></i></div>
+</div>
+<main id="book">
+  <nav id="nav"></nav>
+  <div id="sheet"><i></i><i></i></div>
+  <div id="view"></div>
+</main>
+<div id="scrolllayer" hidden></div>
+<button id="fab" aria-label="Open dice roller">d20</button>
+<div id="dice" hidden></div>
+<div id="toast" hidden></div>
+<script src="js/data.js"></script>
+<script src="js/core.js"></script>
+<script src="js/cloud.js"></script>
+<script src="js/player.js"></script>
+<script src="js/table.js"></script>
+<script src="js/dm.js"></script>
+<script src="js/solo.js"></script>
+<script src="js/homebrew.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
