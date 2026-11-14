@@ -87,8 +87,8 @@ html { overflow-x: clip; }
 .leaf { position: absolute; inset: 5px 20px 7px 50%; z-index: 5; pointer-events: none; perspective: 3200px; perspective-origin: 45% 45%; animation: leaffade 1.2s linear forwards; }
 .leaf::before { content: ""; position: absolute; inset: 0; background: radial-gradient(75% 110% at 65% 50%, rgba(30, 15, 3, .45), transparent 72%); animation: leafshade 1.2s ease-in-out forwards; }
 .seg { position: absolute; top: 0; bottom: 0; left: 0; width: 10%; transform-origin: 0 50%; transform-style: preserve-3d;
-  background: linear-gradient(270deg, rgba(255, 240, 200, .08), rgba(60, 35, 10, .07)), linear-gradient(180deg, #d8b87e, #c9a56c 55%, #b89358);
-  box-shadow: 0 0 0 .5px #c9a56c; animation: turnbase 1.2s cubic-bezier(.45, 0, .55, 1) forwards; }
+  background: #cdaa70; /* one flat colour: any gradient here repeats on every strip and shows as stripes */
+  box-shadow: 0 0 0 1px #cdaa70; animation: turnbase 1.2s cubic-bezier(.45, 0, .55, 1) forwards; }
 .seg .seg { left: calc(100% - 1px); width: 100%; animation-name: turncurl; animation-timing-function: ease-in-out; }
 /* the outermost strip is the torn free edge of the sheet */
 .seg:not(:has(.seg)) { clip-path: polygon(100% 1.5%, 65% 0, 0 0, 0 100%, 60% 100%, 88% 98.6%, 100% 96%, 82% 71%, 100% 69.5%, 100% 33%, 78% 31.8%, 100% 30%); }
