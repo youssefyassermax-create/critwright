@@ -7,6 +7,7 @@
 
 // ---------- Files ----------
 function saveFile(filename, text) {
+  if (window.AndroidHost) return window.AndroidHost.saveFile(filename, text); // Android app: the phone's own save dialog
   if (CLOUD.downloads) { // hosted version: the host shows its own save dialog
     CLOUD.downloads.save({ filename, data: text }).catch(e => {
       if (!e || e.code !== 'declined') modal('Export failed', h('p', {}, 'The file could not be saved here.'), [['OK']]);

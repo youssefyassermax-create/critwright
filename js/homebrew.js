@@ -50,15 +50,7 @@ function viewSettings() {
   const exportData = () => {
     const copy = JSON.parse(JSON.stringify(DB));
     copy.settings.apiKey = ''; // never write the key into a file that gets shared
-    const json = JSON.stringify(copy, null, 1);
-    if (CLOUD.downloads) { // hosted version: the host shows its own save dialog
-      CLOUD.downloads.save({ filename: 'critwright-backup.json', data: json }).catch(e => {
-        if (!e || e.code !== 'declined') modal('Export failed', h('p', {}, 'The file could not be saved here.'), [['OK']]);
-      });
-      return;
-    }
-    const a = h('a', { href: URL.createObjectURL(new Blob([json], { type: 'application/json' })), download: 'critwright-backup.json' });
-    document.body.append(a); a.click(); a.remove();
+    saveFile('critwright-backup.json', JSON.stringify(copy, null, 1)); // picks the right way to save for where the app is running
   };
   const synced = !!CLOUD.col;
   return h('div', {},
