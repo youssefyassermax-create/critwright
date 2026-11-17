@@ -191,7 +191,11 @@ let toastTimer, rollTimer, flickTimer;
 function toast(e) {
   const el = $('#toast');
   const num = h('span', {}, e.total);
-  el.replaceChildren(h('div', { class: 'die' }, num),
+  // The die takes the outline of the first die in the expression (d4 triangle, d8 diamond, ...).
+  const m = /\d*d(\d+)/i.exec(e.expr || '');
+  const sides = m ? +m[1] : 20;
+  const shape = [2, 4, 6, 8, 10, 12, 20, 100].includes(sides) ? sides : 'x';
+  el.replaceChildren(h('div', { class: 'die', 'data-d': shape }, num),
     h('div', { class: 'info' }, h('strong', {}, e.label), h('div', { class: 'muted' }, e.text + (e.nat === 20 ? '  Natural 20!' : e.nat === 1 ? '  Natural 1' : ''))));
   clearTimeout(toastTimer); clearTimeout(rollTimer); clearInterval(flickTimer);
   const land = () => {
@@ -202,7 +206,7 @@ function toast(e) {
   const animate = e.expr && !matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (animate) {
     el.className = 'rolling';
-    const top = Math.max(20, Math.abs(e.total));
+    const top = Math.max(sides, Math.abs(e.total));
     flickTimer = setInterval(() => { num.textContent = rand(top); }, 60);
     rollTimer = setTimeout(land, 750);
   } else land();
