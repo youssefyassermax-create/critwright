@@ -12,20 +12,6 @@
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<!-- Paper filter: roughens the page edge into a tear, then lays stains and grain over it -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="torn" x="-3%" y="-3%" width="106%" height="106%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="7" result="edge"/>
-    <feDisplacementMap in="SourceGraphic" in2="edge" scale="18" xChannelSelector="R" yChannelSelector="G" result="paper"/>
-    <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="3" seed="3" result="blot"/>
-    <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0.38  0 0 0 0 0.22  0 0 0 0 0.06  0 0 0 1.7 -0.82" result="stain"/>
-    <feComposite in="stain" in2="paper" operator="in" result="stainIn"/>
-    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="grain"/>
-    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0 0.1  0 0 0 0.3 -0.08" result="speck"/>
-    <feComposite in="speck" in2="paper" operator="in" result="speckIn"/>
-    <feMerge><feMergeNode in="paper"/><feMergeNode in="stainIn"/><feMergeNode in="speckIn"/></feMerge>
-  </filter>
-</svg>
 <!-- Things left lying on the table around the book -->
 <div id="props" aria-hidden="true">
   <i class="coin c1"></i><i class="coin c2"></i><i class="coin stack c3"></i><i class="coin silver c4"></i>

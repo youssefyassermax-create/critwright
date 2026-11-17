@@ -57,6 +57,8 @@ function render() {
     layer.replaceChildren(sheet(hero, parts[2] || 'main'));
     layer.hidden = false;
     layer.querySelector('.scroll-inner').scrollTop = top;
+    // How far the lower rod rolls while the sheet unrolls (measured once, so the animation itself never re-lays-out the sheet)
+    if (opened) layer.style.setProperty('--h', layer.querySelector('.scroll-body').offsetHeight + 'px');
   } else {
     layer.replaceChildren();
     layer.hidden = true;
